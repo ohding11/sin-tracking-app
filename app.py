@@ -47,7 +47,6 @@ def read():
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('read.html', docs=docs) # render the read template
 
-
 @app.route('/create')
 def create():
     """
