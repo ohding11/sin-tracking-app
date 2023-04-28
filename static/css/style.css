@@ -17,12 +17,13 @@ p.post {
   font-size: 16px;
   border:1px;
   border-style:groove;
+  padding:10px;
+  margin-left:10px;
 }
 
 footer {
   font-family:avenir;
   margin-bottom: 5px;
   background-color:palegreen;
-  color:darkgreen;
   padding:20px;
 }
