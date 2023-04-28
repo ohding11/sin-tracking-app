@@ -1,18 +1,41 @@
-{% extends 'base.html' %} {% block container %}
-<h2>Update</h2>
-<p>Edit a record in the MongoDB database collection.</p>
-<form method="POST" action="{{ url_for('edit_post', mongoid=mongoid) }}">
-  <p>
-    Your name:
-    <input type="text" id="fname" name="fname" value="{{doc.name}}" /><br />
-  </p>
-  <p>
-    Message:
-    <textarea id="fmessage" name="fmessage">{{doc.message}}</textarea>
-  </p>
-  <p>
-    <a href="{{ url_for('read')}}">Cancel</a>
-    <input type="submit" name="post-btn" value="Save" />
-  </p>
-</form>
+{% extends 'base.html' %}
+{% block container %}
+  <h2>Update</h2>
+  <p>Edit a record in the MongoDB database collection.</p>
+  <form method="POST" action="{{ url_for('edit_post', mongoid=mongoid) }}">
+    <p>
+      Location (Nearest Intersection):
+      <input type="text" id="flocation" name="flocation" value="{{doc.location}}" /><br />
+    </p>
+    <p>
+      Borough:
+      <select id="fborough" name="fborough">
+        <option value="Manhattan" {% if doc.borough == 'Manhattan' %}selected{% endif %}>Manhattan</option>
+        <option value="Bronx" {% if doc.borough == 'Bronx' %}selected{% endif %}>Bronx</option>
+        <option value="Brooklyn" {% if doc.borough == 'Brooklyn' %}selected{% endif %}>Brooklyn</option>
+        <option value="Queens" {% if doc.borough == 'Queens' %}selected{% endif %}>Queens</option>
+        <option value="Staten Island" {% if doc.borough == 'Staten Island' %}selected{% endif %}>Staten Island</option>
+      </select><br />
+    </p>
+    <p>
+      Car License Plate Number:
+      <input type="text" id="fplate" name="fplate" value="{{doc.plate}}" /><br />
+    </p>
+    <p>
+      Car Model:
+      <input type="text" id="fmodel" name="fmodel" value="{{doc.model}}" /><br />
+    </p>
+    <p>
+      Car Color:
+      <input type="text" id="fcolor" name="fcolor" value="{{doc.color}}" /><br />
+    </p>
+    <p>
+      Additional Notes:
+      <textarea id="fnotes" name="fnotes">{{doc.notes}}</textarea>
+    </p>
+    <p>
+      <a href="{{ url_for('read')}}">Cancel</a>
+      <input type="submit" name="post-btn" value="Save" />
+    </p>
+  </form>
 {% endblock %}
