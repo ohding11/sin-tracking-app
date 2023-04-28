@@ -23,7 +23,7 @@ h2 {
 
 p {
   text-align:center;
-  margin:30px;
+  margin:40px;
 }
 
 p.post {
@@ -34,7 +34,7 @@ p.post {
   text-align:left;
 }
 
-input {
+form p {
   font-size: 16px;
   padding:10px;
   text-align:left;
