@@ -9,10 +9,10 @@
         <p class="post">
             Report from {{doc.location}}, {{doc.borough}} at {{ doc.created_at.strftime("%H:%M on %d %B %Y") }}
             </br>
-            </br>
             Car Description: {{doc.color}} {{doc.model}}, {{doc.plate}}
             </br>
             Additional Notes: {{doc.notes}}
+            </br>
             <a href="{{ url_for('edit',mongoid=doc._id)}}">Edit</a> | <a href="{{ url_for('delete',mongoid=doc._id)}}">Delete</a>
         </p>         
     </div>
