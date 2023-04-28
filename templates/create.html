@@ -3,7 +3,15 @@
   <p>Please enter the following information to the best of your ability.</p>
   <form method="POST" action="{{ url_for('create_post') }}">
     <p>Location (Nearest Intersection): <input type="text" id="flocation" name="flocation" /></p>
-    <p>Borough: <input type="text" id="fborough" name="fborough" /></p>
+    <p>Borough:
+      <select id="fborough" name="fborough">
+        <option value="Manhattan">Manhattan</option>
+        <option value="Brooklyn">Brooklyn</option>
+        <option value="Queens">Queens</option>
+        <option value="Bronx">Bronx</option>
+        <option value="Staten Island">Staten Island</option>
+      </select>
+    </p>
     <p>Car License Plate Number: <input type="text" id="fplate" name="fplate" /></p>
     <p>Car Model: <input type="text" id="fmodel" name="fmodel" /></p>
     <p>Car Color: <input type="text" id="fcolor" name="fcolor" /></p>
