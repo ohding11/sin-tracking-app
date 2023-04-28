@@ -1,5 +1,9 @@
+* {
+  font-family:avenir;
+}
+
 header {
-  font-family: avenir;
+  font-weight:bold;
   border-bottom: 2px;
   border-bottom-style: double;
   border-bottom-color:forestgreen;
@@ -12,8 +16,17 @@ header img {
   height: auto 
 }
 
+h2 {
+  color:green;
+  text-align:center;
+}
+
+p {
+  text-align:center;
+  margin:20px;
+}
+
 p.post {
-  font-family:avenir;
   font-size: 16px;
   border:1px;
   border-style:groove;
@@ -22,8 +35,7 @@ p.post {
 }
 
 footer {
-  font-family:avenir;
   margin-bottom: 5px;
-  background-color:palegreen;
+  background-color: #b9f0d3 ;
   padding:20px;
 }
