@@ -44,10 +44,10 @@ def read():
     Route for GET requests to the read page.
     Displays some information for the user with links to other pages.
     """
-    docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
+    docs = db.bikeapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('read.html', docs=docs) # render the read template
 
-@app.route('/create')
+@app.route('/submit')
 def create():
     """
     Route for GET requests to the create page.
@@ -56,23 +56,30 @@ def create():
     return render_template('create.html') # render the create template
 
 
-@app.route('/create', methods=['POST'])
-def create_post():
+@app.route('/submit', methods=['POST'])
+def submit_report():
     """
     Route for POST requests to the create page.
     Accepts the form submission data for a new document and saves the document to the database.
     """
-    name = request.form['fname']
-    message = request.form['fmessage']
-
+    location = request.form['flocation']
+    borough = request.form['fborough']
+    plate = request.form['fplate']
+    model = request.form['fmodel']
+    color = request.form['fcolor']
+    notes = request.form['fnotes']
 
     # create a new document with the data the user entered
     doc = {
-        "name": name,
-        "message": message, 
+        'location': location,
+        'borough': borough,
+        'plate': plate,
+        'model': model,
+        'color': color,
+        'notes': notes,
         "created_at": datetime.datetime.utcnow()
     }
-    db.exampleapp.insert_one(doc) # insert a new document
+    db.bikeapp.insert_one(doc) # insert a new document
 
     return redirect(url_for('read')) # tell the browser to make a request for the /read route
 
@@ -103,7 +110,7 @@ def edit_post(mongoid):
         "created_at": datetime.datetime.utcnow()
     }
 
-    db.exampleapp.update_one(
+    db.bikeapp.update_one(
         {"_id": ObjectId(mongoid)}, # match criteria
         { "$set": doc }
     )
@@ -117,7 +124,7 @@ def delete(mongoid):
     Route for GET requests to the delete page.
     Deletes the specified record from the database, and then redirects the browser to the read page.
     """
-    db.exampleapp.delete_one({"_id": ObjectId(mongoid)})
+    db.bikeapp.delete_one({"_id": ObjectId(mongoid)})
     return redirect(url_for('read')) # tell the web browser to make a request for the /read route.
 
 @app.route('/webhook', methods=['POST'])
