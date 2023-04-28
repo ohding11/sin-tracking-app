@@ -1,9 +1,9 @@
 header {
   font-family: avenir;
-  font-weight: bold;
   border-bottom: 2px;
   border-bottom-style: double;
   border-bottom-color:forestgreen;
+  padding:20px;
 }
 
 header img {
@@ -13,11 +13,16 @@ header img {
 }
 
 p.post {
-  font-size: 12px;
+  font-family:avenir;
+  font-size: 16px;
+  border:1px;
+  border-style:groove;
 }
 
 footer {
+  font-family:avenir;
   margin-bottom: 5px;
   background-color:palegreen;
-  color:white;
+  color:darkgreen;
+  padding:20px;
 }
