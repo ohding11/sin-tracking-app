@@ -38,7 +38,7 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/read')
+@app.route('/reports')
 def read():
     """
     Route for GET requests to the read page.
@@ -67,22 +67,30 @@ def create_post():
     plate = request.form['fplate']
     model = request.form['fmodel']
     color = request.form['fcolor']
+    email = request.form['femail']
     notes = request.form['fnotes']
 
-    # create a new document with the data the user entered
     doc = {
         'location': location,
         'borough': borough,
         'plate': plate,
         'model': model,
         'color': color,
+        'email': email,
         'notes': notes,
         "created_at": datetime.datetime.utcnow()
     }
+    
     db.bikeapp.insert_one(doc) # insert a new document
 
-    return redirect(url_for('read')) # tell the browser to make a request for the /read route
+    return redirect(url_for('success')) # tell the browser to make a request for the /read route
 
+@app.route('/sucess')
+def success():
+    """
+    Success page after a report is successfully submitted
+    """
+    return render_template('success.html')
 
 @app.route('/edit/<mongoid>')
 def edit(mongoid):
@@ -100,13 +108,22 @@ def edit_post(mongoid):
     Route for POST requests to the edit page.
     Accepts the form submission data for the specified document and updates the document in the database.
     """
-    name = request.form['fname']
-    message = request.form['fmessage']
+    location = request.form['flocation']
+    borough = request.form['fborough']
+    plate = request.form['fplate']
+    model = request.form['fmodel']
+    color = request.form['fcolor']
+    email = request.form['femail']
+    notes = request.form['fnotes']
 
     doc = {
-        # "_id": ObjectId(mongoid), 
-        "name": name, 
-        "message": message, 
+        'location': location,
+        'borough': borough,
+        'plate': plate,
+        'model': model,
+        'color': color,
+        'email': email,
+        'notes': notes,
         "created_at": datetime.datetime.utcnow()
     }
 

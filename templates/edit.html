@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block container %}
-  <h2>Update</h2>
-  <p>Edit a record in the MongoDB database collection.</p>
+  <h2>Edit Report</h2>
+  <p>Please enter the following information to the best of your ability.</p>
   <form method="POST" action="{{ url_for('edit_post', mongoid=mongoid) }}">
     <p>
       Location (Nearest Intersection):
@@ -28,6 +28,10 @@
     <p>
       Car Color:
       <input type="text" id="fcolor" name="fcolor" value="{{doc.color}}" /><br />
+    </p>
+    <p>
+      Email Address (will not be made public): 
+      <input type="text" id="femail" name="femail" /><br />
     </p>
     <p>
       Additional Notes:
