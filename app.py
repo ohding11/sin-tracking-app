@@ -57,7 +57,7 @@ def create():
 
 
 @app.route('/submit', methods=['POST'])
-def submit_report():
+def create_post():
     """
     Route for POST requests to the create page.
     Accepts the form submission data for a new document and saves the document to the database.
