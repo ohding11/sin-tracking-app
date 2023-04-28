@@ -11,13 +11,10 @@
             </br>
             <a href="{{ url_for('edit',mongoid=doc._id)}}">Edit</a> | <a href="{{ url_for('delete',mongoid=doc._id)}}">Delete</a>
             </br>
-        </p>
-        <p>
             Car Description: {{doc.color}} {{doc.model}}, {{doc.plate}}
             </br>
             Additional Notes: {{doc.notes}}
-        </p>
-            
+        </p>         
     </div>
     {%endfor%}
 </p>
