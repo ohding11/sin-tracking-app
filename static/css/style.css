@@ -1,74 +1,14 @@
-body {
-  background-color: #FFFFFF;
-  font-family: Arial, sans-serif;
+* {
+  box-sizing: border-box;
+  font-family: avenir
 }
 
-/* Header */
 header {
-  background-color: #006699;
-  color: #FFFFFF;
-  padding: 10px;
+  background-color: #fff;
+  color: #006db9;
+  padding: 20px;
 }
 
-/* Navigation */
-nav {
-  background-color: #006699;
-  color: #FFFFFF;
-  padding: 10px;
-}
-
-nav a {
-  color: #FFFFFF;
-}
-
-nav a:hover {
-  color: #C3DDE6;
-}
-
-/* Content */
-main {
-  background-color: #FFFFFF;
-  color: #000000;
-  padding: 10px;
-}
-
-/* Form */
-form {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-form label {
-  display: block;
-  margin-bottom: 10px;
-  color: #006699;
-  font-weight: bold;
-}
-
-form input[type="text"], form input[type="email"], form input[type="password"], form textarea {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border: 2px solid #C3DDE6;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-form input[type="submit"], form button {
-  background-color: #006699;
-  color: #FFFFFF;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-form input[type="submit"]:hover, form button:hover {
-  background-color: #C3DDE6;
-}
-
-/* Footer */
 footer {
   background-color: #C3DDE6;
   color: #000000;
