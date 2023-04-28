@@ -1,7 +1,9 @@
-header,
-footer,
-main {
-  padding: 20px;
+header {
+  font-family: avenir;
+  font-weight: bold;
+  border-bottom: 2px;
+  border-bottom-style: double;
+  border-bottom-color:forestgreen;
 }
 
 header img {
@@ -10,18 +12,12 @@ header img {
   height: auto 
 }
 
-header,
-main {
-  border-bottom: 2px solid;
-  margin-bottom: 5px;
-}
-
 p.post {
   font-size: 12px;
 }
 
 footer {
   margin-bottom: 5px;
-  background-color:lightgreen;
+  background-color:palegreen;
   color:white;
 }
