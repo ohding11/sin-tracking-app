@@ -9,4 +9,4 @@ All the code used to build our web app are within this project repository. Pleas
 - The ```LICENSE``` file contains a license agreement establishing guidelines from the publisher of the source code on how we are allowed to utilize it.
 <br>
 <br>
-The source code for our web app was provided to us by materials distributed in Professor Amos Bloomberg's Database Design and Implementation course at NYU. We only used it for the purposes of establishing the connection to the web-hosted database, and any code that executes the visual design, user interactivity, and calculations featured in the app represents our own intellectual work.
+The source code for our web app was provided to us by materials distributed in Professor Amos Bloomberg's Database Design and Implementation course at NYU. We only used the source for the purposes of establishing the connection to the web-hosted database, and any code that executes the visual design, user interactivity, and calculations featured in the app represents our own intellectual work.
