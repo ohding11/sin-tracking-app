@@ -5,7 +5,7 @@ All the code used to build our web app are within this project repository. Pleas
 <br>
 - The ```templates``` folder contains the HTML templates for each page on our web app. The style, formatting, and interactive elements of the project are all controlled by the code within these files.
 - The ```app.py``` file contains the code that connects our app to a web-hosted MongoDB Atlas databse, as well as functions that update the database based on user interactions. The code used to establish the web connections were taken from the source code (see blow), but the functions nested within them were written by us.
-- The ```credentials.py```, ```flask.cgi```, and ```requirements.txt``` files configure the credentials and prerequisite packages needed to establish and authenticate the database connection. This was taken verbatim from the source code and we have not made any modifications to it.
+- The ```credentials.py```, ```flask.cgi```, and ```requirements.txt``` files configure the credentials and prerequisite packages needed to establish and authenticate the database connection. These were taken verbatim from the source code and we have not made any modifications to it.
 - The ```LICENSE``` file contains a license agreement establishing guidelines from the publisher of the source code on how we are allowed to utilize it.
 <br>
 <br>
