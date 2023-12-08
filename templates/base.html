@@ -1,30 +1,79 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bike Snitches</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+    <title>Confess Count DEMO</title>
   </head>
+  <style>
+    * {
+  font-family:avenir;
+}
+
+header {
+  font-weight:bold;
+  border-bottom: 2px;
+  border-bottom-style: double;
+  border-bottom-color:forestgreen;
+  padding:20px;
+}
+
+header h1 {
+  font-size: 60px;
+  padding:10px;
+  text-align:center;
+  color:black;
+}
+
+h2 {
+  font-size:30px;
+  color:green;
+  text-align:center;
+}
+
+p {
+  font-size: 20px;
+  text-align:center;
+  margin:40px;
+}
+
+p.post {
+  font-size: 16px;
+  border:1px;
+  border-style:groove;
+  padding:10px;
+  text-align:left;
+}
+
+form p {
+  font-size: 16px;
+  padding:10px;
+  text-align:left;
+}
+
+footer {
+  margin-bottom: 5px;
+  background-color: #b9f0d3;
+  padding:20px;
+}
+
+footer p {
+  font-size: 15px;
+}
+
+  </style>
   <body>
     <div class="container">
       <header>
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Bike Snitches Logo" class="logo">
-        <h1>NYC Bikers Snitching Platform</h1>
+        <h1>[confess&nbsp;&nbsp;&nbsp;&nbsp; <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count]</h1>
         <p>
-          <a href="{{ url_for('home')}}">Home</a> |
-          <a href="{{ url_for('read')}}">Active Reports</a> |
-          <a href="{{ url_for('create')}}">Submit a Report</a>
+          <a href="{{ url_for('home')}}">Dashboard</a> |
+          <a href="{{ url_for('read')}}">Entries</a> |
+          <a href="{{ url_for('create')}}">Submit an Entry</a>
         </p>
       </header>
       <main>{% block container %} {% endblock %}</main>
       <footer>
         <p>
-          The source code for this app is
-          <a href="https://github.com/dbdesign-assignments-spring2023/web-app-ohding11"
-            >available on Github</a
-          >.
+          This database is hosted on AWS data centers in Northern Virginia. The environmental effects associated with the use of this app are not included in calculations.
         </p>
       </footer>
     </div>

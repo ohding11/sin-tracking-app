@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<h2>Active Reports</h2>
+<h2>Your Entries</h2>
 <p>     
     {% for doc in docs %}
     <div>
         <hr class="solid">
         <p class="post">
-            Report from {{doc.location}}, {{doc.borough}} at {{ doc.created_at.strftime("%H:%M on %d %B %Y") }}
+            {{doc.created_at}}
             </br>
-            Car Description: {{doc.color}} {{doc.model}}, {{doc.plate}}
+            Category: {{doc.category}}
+            </br>
+            {% if doc.category == "Transportation/Shipping" %}
+                Shipment Size: {{ doc.shipping_size }} KG
+                <br>
+                Distance Shipped: {{ doc.shipping_dist }} KM
+            {% elif doc.category == "Data Storage" %}
+                Data Stored: {{doc.data_stored}} GB
+                <br>
+                Stored For: {{ doc.data_years }} years
+            {% elif doc.category == "Plastic Manufacturing" %}
+                Plastic Used: {{doc.plastic}} KG
+            {% elif doc.category == "Agriculture" %}
+                Land Use: {{doc.agr_land}} acres
+                <br>
+                Period of Use: {{doc.agr_years}} years
+            {% endif %}
             </br>
             Additional Notes: {{doc.notes}}
+            </br>
+            </br>
+            Estimated Carbon Footprint: {{doc.footprint}} metric tons of GhG
             </br>
             <a href="{{ url_for('edit',mongoid=doc._id)}}">Edit</a> | <a href="{{ url_for('delete',mongoid=doc._id)}}">Delete</a>
         </p>         

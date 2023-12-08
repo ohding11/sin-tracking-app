@@ -1,45 +1,119 @@
 {% extends 'base.html' %}
 {% block container %}
-  <h2>Edit Report</h2>
+  <h2>Edit Entry</h2>
   <p>Please enter the following information to the best of your ability.</p>
   <form method="POST" action="{{ url_for('edit_post', mongoid=mongoid) }}">
-    <p>
-      Location (Nearest Intersection):
-      <input type="text" id="flocation" name="flocation" value="{{doc.location}}" /><br />
+    <p>Select a Category:
+      <select id="fcat" name="fcat" onchange="toggleTextArea()">
+        <option value="Transportation/Shipping">Transportation/Shipping</option>
+        <option value="Data Storage">Data Storage</option>
+        <option value="Plastic Manufacturing">Plastic Manufacturing</option>
+        <option value="Agriculture">Agriculture</option>
+      </select>
     </p>
-    <p>
-      Borough:
-      <select id="fborough" name="fborough">
-        <option value="Manhattan" {% if doc.borough == 'Manhattan' %}selected{% endif %}>Manhattan</option>
-        <option value="Bronx" {% if doc.borough == 'Bronx' %}selected{% endif %}>Bronx</option>
-        <option value="Brooklyn" {% if doc.borough == 'Brooklyn' %}selected{% endif %}>Brooklyn</option>
-        <option value="Queens" {% if doc.borough == 'Queens' %}selected{% endif %}>Queens</option>
-        <option value="Staten Island" {% if doc.borough == 'Staten Island' %}selected{% endif %}>Staten Island</option>
-      </select><br />
+
+    <p id="shipmentSize">
+      Size of Shipment: 
+      <textarea id="fshipmentsize" name="fshipmentsize" style="width: 80px; height: 20px;"></textarea>
+      KG
     </p>
-    <p>
-      Car License Plate Number:
-      <input type="text" id="fplate" name="fplate" value="{{doc.plate}}" /><br />
+
+    <p id="shipmentDist">
+      Distance Shipped: 
+      <textarea id="fshipmentdist" name="fshipmentdist" style="width: 80px; height: 20px;"></textarea>
+      KM
     </p>
-    <p>
-      Car Model:
-      <input type="text" id="fmodel" name="fmodel" value="{{doc.model}}" /><br />
+
+    <p id="dataStored" style="display:none;">
+      Volume of Stored Data: 
+      <textarea id="fdata" name="fdata" style="width: 80px; height: 20px;"></textarea>
+      GB
     </p>
-    <p>
-      Car Color:
-      <input type="text" id="fcolor" name="fcolor" value="{{doc.color}}" /><br />
+
+
+    <p id="dataYears" style="display:none;">
+      Period of Data Storage: 
+      <textarea id="fdatayears" name="fdatayears" style="width: 80px; height: 20px;"></textarea>
+      years
     </p>
-    <p>
-      Email Address (will not be made public): 
-      <input type="text" id="femail" name="femail" value="{{doc.email}}"/><br />
+
+
+    <p id="plastic" style="display:none;">
+      Estimated Plastic Used: 
+      <textarea id="fplastic" name="fplastic" style="width: 80px; height: 20px;"></textarea>
+      KG
     </p>
-    <p>
-      Additional Notes:
-      <textarea id="fnotes" name="fnotes">{{doc.notes}}</textarea>
+
+    <p id="agricultureLand" style="display:none;">
+      Land Used for Agriculture: 
+      <textarea id="fagricultureland" name="fagricultureland" style="width: 80px; height: 20px;"></textarea>
+      acres
     </p>
+
+    <p id="agricultureYears" style="display:none;">
+      Period of Use: 
+      <textarea id="fagricultureyears" name="fagricultureyears" style="width: 80px; height: 20px;"></textarea>
+      years
+    </p>
+
+    <p id="notes">
+      Additional Notes: 
+      <textarea id="fnotes" name="fnotes" style="width: 200px; height: 50px;"></textarea>
+    </p>
+
     <p>
       <a href="{{ url_for('read')}}">Cancel</a>
-      <input type="submit" name="post-btn" value="Save" />
+      <input type="submit" name="post-btn" value="Post" />
     </p>
+
+    <script>
+      function toggleTextArea() {
+        var categoryDropdown = document.getElementById("fcat");
+        var shipmentSizeParagraph = document.getElementById("shipmentSize");
+        var shipmentDistParagraph = document.getElementById("shipmentDist");
+        var dataParagraph = document.getElementById("dataStored");
+        var dataYearsParagraph = document.getElementById("dataYears");
+        var plasticParagraph = document.getElementById("plastic");
+        var agrLandParagraph = document.getElementById("agricultureLand");
+        var agrYearsParagraph = document.getElementById("agricultureYears");
+
+        if (categoryDropdown.value === "Transportation/Shipping") {
+          shipmentSizeParagraph.style.display = "block";
+          shipmentDistParagraph.style.display = "block";
+          dataParagraph.style.display = "none";
+          dataYearsParagraph.style.display = "none";
+          plasticParagraph.style.display = "none";
+          agrLandParagraph.style.display = "none";
+          agrYearsParagraph.style.display = "none";
+        } else if (categoryDropdown.value === "Data Storage"){
+          shipmentSizeParagraph.style.display = "none";
+          shipmentDistParagraph.style.display = "none";
+          dataParagraph.style.display = "block";
+          dataYearsParagraph.style.display = "block";
+          plasticParagraph.style.display = "none";
+          agrLandParagraph.style.display = "none";
+          agrYearsParagraph.style.display = "none";
+        }
+          else if (categoryDropdown.value === "Plastic Manufacturing"){
+          shipmentSizeParagraph.style.display = "none";
+          shipmentDistParagraph.style.display = "none";
+          dataParagraph.style.display = "none";
+          dataYearsParagraph.style.display = "none";
+          plasticParagraph.style.display = "block";
+          agrLandParagraph.style.display = "none";
+          agrYearsParagraph.style.display = "none";
+        }
+          else if (categoryDropdown.value === "Agriculture"){
+          shipmentSizeParagraph.style.display = "none";
+          shipmentDistParagraph.style.display = "none";
+          dataParagraph.style.display = "none";
+          dataYearsParagraph.style.display = "none";
+          plasticParagraph.style.display = "none";
+          agrLandParagraph.style.display = "block";
+          agrYearsParagraph.style.display = "block";
+        }
+        
+      }
+    </script>
   </form>
 {% endblock %}

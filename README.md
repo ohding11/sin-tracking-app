@@ -1,22 +1,12 @@
-# Flask-MongoDB Web App
+# Flask-MongoDB Sin Tracking App
 
-For this exercise, I created a web app called **Bike Snitches**, which allows users to submit reports of cars parked illegally in bike lanes in NYC, as well as view documents containing reports made by other users. The link to the web app can be found [here](https://i6.cims.nyu.edu/~ol544/web-app-ohding11/flask.cgi/).
-</br>
-</br>
-I have submitted an example report, which is visible in the '/reports' page. For demonstration purposes, anyone can edit or delete any reports from the database - however, if this app was deployed for practical use, I would add a feature that only allows authorized users to do so. The data is stored in a MongoDB collection titles ```bikeapp```. I checked that it was storing the data properly by running the query ```db.bikeapp.find()``` in the mongo shell, which gave me the following results:
-```
-[
-  {
-    _id: ObjectId("644c30082c6d48b9535d926d"),
-    location: '14th and First Ave',
-    borough: 'Manhattan',
-    plate: '26562',
-    model: 'Honda Odyssey',
-    color: 'Silver',
-    email: 'ol544@nyu.edu',
-    notes: 'On northeast corner of intersection.',
-    created_at: ISODate("2023-04-28T20:43:52.130Z")
-  }
-]
-```
-I worked indpendently on this project.
+All the code used to build our web app are within this project repository. Please see below for a guide on the file directories and their function in the project.
+<br>
+<br>
+- The ```templates``` folder contains the HTML templates for each page on our web app. The style, formatting, and interactive elements of the project are all controlled by the code within these files.
+- The ```app.py``` file contains the code that connects our app to a web-hosted MongoDB Atlas databse, as well as functions that update the database based on user interactions. The code used to establish the web connections were taken from the source code (see blow), but the functions nested within them were written by us.
+- The ```credentials.py```, ```flask.cgi```, and ```requirements.txt``` files configure the credentials and prerequisite packages needed to establish and authenticate the database connection. This was taken verbatim from the source code and we have not made any modifications to it.
+- The ```LICENSE``` file contains a license agreement establishing guidelines from the publisher of the source code on how we are allowed to utilize it.
+<br>
+<br>
+The source code for our web app was provided to us by materials distributed in Professor Amos Bloomberg's Database Design and Implementation course at NYU. We only used it for the purposes of establishing the connection to the web-hosted database, and any code that executes the visual design, user interactivity, and calculations represents our own intellectual work.

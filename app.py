@@ -7,6 +7,7 @@ import datetime
 from bson.objectid import ObjectId
 import os
 import subprocess
+from pymongo.mongo_client import MongoClient
 
 # instantiate the app
 app = Flask(__name__)
@@ -21,12 +22,10 @@ if config['FLASK_ENV'] == 'development':
     # turn on debugging, if in development
     app.debug = True # debug mnode
 
-# make one persistent connection to the database
-connection = pymongo.MongoClient(config['MONGO_HOST'], 27017, 
-                                username=config['MONGO_USER'],
-                                password=config['MONGO_PASSWORD'],
-                                authSource=config['MONGO_DBNAME'])
-db = connection[config['MONGO_DBNAME']] # store a reference to the database
+uri = "mongodb://ol544:Sn8IKD3hGIl1PN86@ac-wri7g9g-shard-00-00.aswcm8s.mongodb.net:27017,ac-wri7g9g-shard-00-01.aswcm8s.mongodb.net:27017,ac-wri7g9g-shard-00-02.aswcm8s.mongodb.net:27017/?ssl=true&replicaSet=atlas-p47cqp-shard-0&authSource=admin&retryWrites=true&w=majority"
+# Create a new client and connect to the server
+connection = MongoClient(uri)
+db = connection["sin-tracking-app"] # store a reference to the database
 
 # set up the routes
 
@@ -35,16 +34,19 @@ def home():
     """
     Route for the home page
     """
-    return render_template('index.html')
+    entries = db.sins.find({})
 
+    total_footprint = sum(entry['footprint'] for entry in entries)
 
-@app.route('/reports')
+    return render_template('index.html',total_footprint=total_footprint)
+
+@app.route('/entries')
 def read():
     """
     Route for GET requests to the read page.
     Displays some information for the user with links to other pages.
     """
-    docs = db.bikeapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
+    docs = db.sins.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('read.html', docs=docs) # render the read template
 
 @app.route('/submit')
@@ -62,26 +64,59 @@ def create_post():
     Route for POST requests to the create page.
     Accepts the form submission data for a new document and saves the document to the database.
     """
-    location = request.form['flocation']
-    borough = request.form['fborough']
-    plate = request.form['fplate']
-    model = request.form['fmodel']
-    color = request.form['fcolor']
-    email = request.form['femail']
+    category = request.form['fcat']
     notes = request.form['fnotes']
 
+    if category == "Transportation/Shipping":
+        shippingSize = float(request.form['fshipmentsize'])
+        shippingDist = float(request.form['fshipmentdist'])
+        dataStored = 0
+        dataYears = 0
+        plastic = 0
+        agrLand = 0
+        agrYears = 0
+    if category == "Data Storage":
+        shippingSize = 0
+        shippingDist = 0
+        dataStored = float(request.form['fdata'])
+        dataYears = float(request.form['fdatayears'])
+        plastic = 0
+        agrLand = 0
+        agrYears = 0
+    if category == "Plastic Manufacturing":
+        shippingSize = 0
+        shippingDist = 0
+        dataStored = 0
+        dataYears = 0
+        plastic = float(request.form['fplastic'])
+        agrLand = 0
+        agrYears = 0
+    if category == "Agriculture":
+        shippingSize = 0
+        shippingDist = 0
+        dataStored = 0
+        dataYears = 0
+        plastic = 0
+        agrLand = float(request.form['fagricultureland'])
+        agrYears = float(request.form['fagricultureyears'])
+
+    footprint = (shippingSize*shippingDist*0.000000015)+(dataStored*dataYears*0.002)+(plastic*0.0025)+(agrLand*agrYears*1200000)
+
     doc = {
-        'location': location,
-        'borough': borough,
-        'plate': plate,
-        'model': model,
-        'color': color,
-        'email': email,
+        'category': category,
+        'footprint': footprint,
+        'shipping_size': shippingSize,
+        'shipping_dist': shippingDist,
+        'data_stored': dataStored,
+        'data_years': dataYears,
+        'plastic': plastic,
+        'agr_land': agrLand,
+        'agr_years': agrYears,
         'notes': notes,
         "created_at": datetime.datetime.utcnow()
     }
     
-    db.bikeapp.insert_one(doc) # insert a new document
+    db.sins.insert_one(doc) # insert a new document
 
     return redirect(url_for('success')) # tell the browser to make a request for the /read route
 
@@ -98,7 +133,7 @@ def edit(mongoid):
     Route for GET requests to the edit page.
     Displays a form users can fill out to edit an existing record.
     """
-    doc = db.bikeapp.find_one({"_id": ObjectId(mongoid)})
+    doc = db.sins.find_one({"_id": ObjectId(mongoid)})
     return render_template('edit.html', mongoid=mongoid, doc=doc) # render the edit template
 
 
@@ -108,26 +143,59 @@ def edit_post(mongoid):
     Route for POST requests to the edit page.
     Accepts the form submission data for the specified document and updates the document in the database.
     """
-    location = request.form['flocation']
-    borough = request.form['fborough']
-    plate = request.form['fplate']
-    model = request.form['fmodel']
-    color = request.form['fcolor']
-    email = request.form['femail']
+    category = request.form['fcat']
     notes = request.form['fnotes']
 
+    if category == "Transportation/Shipping":
+        shippingSize = float(request.form['fshipmentsize'])
+        shippingDist = float(request.form['fshipmentdist'])
+        dataStored = 0
+        dataYears = 0
+        plastic = 0
+        agrLand = 0
+        agrYears = 0
+    if category == "Data Storage":
+        shippingSize = 0
+        shippingDist = 0
+        dataStored = float(request.form['fdata'])
+        dataYears = float(request.form['fdatayears'])
+        plastic = 0
+        agrLand = 0
+        agrYears = 0
+    if category == "Plastic Manufacturing":
+        shippingSize = 0
+        shippingDist = 0
+        dataStored = 0
+        dataYears = 0
+        plastic = float(request.form['fplastic'])
+        agrLand = 0
+        agrYears = 0
+    if category == "Agriculture":
+        shippingSize = 0
+        shippingDist = 0
+        dataStored = 0
+        dataYears = 0
+        plastic = 0
+        agrLand = float(request.form['fagricultureland'])
+        agrYears = float(request.form['fagricultureyears'])
+
+    footprint = (shippingSize*shippingDist*0.000000015)+(dataStored*dataYears*0.002)+(plastic*0.0025)+(agrLand*agrYears*1200000)
+
     doc = {
-        'location': location,
-        'borough': borough,
-        'plate': plate,
-        'model': model,
-        'color': color,
-        'email': email,
+        'category': category,
+        'footprint': footprint,
+        'shipping_size': shippingSize,
+        'shipping_dist': shippingDist,
+        'data_stored': dataStored,
+        'data_years': dataYears,
+        'plastic': plastic,
+        'agr_land': agrLand,
+        'agr_years': agrYears,
         'notes': notes,
         "created_at": datetime.datetime.utcnow()
     }
 
-    db.bikeapp.update_one(
+    db.sins.update_one(
         {"_id": ObjectId(mongoid)}, # match criteria
         { "$set": doc }
     )
@@ -141,7 +209,7 @@ def delete(mongoid):
     Route for GET requests to the delete page.
     Deletes the specified record from the database, and then redirects the browser to the read page.
     """
-    db.bikeapp.delete_one({"_id": ObjectId(mongoid)})
+    db.sins.delete_one({"_id": ObjectId(mongoid)})
     return redirect(url_for('read')) # tell the web browser to make a request for the /read route.
 
 @app.route('/webhook', methods=['POST'])
