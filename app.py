@@ -22,7 +22,7 @@ if config['FLASK_ENV'] == 'development':
     # turn on debugging, if in development
     app.debug = True # debug mnode
 
-uri = "mongodb://ol544:Sn8IKD3hGIl1PN86@ac-wri7g9g-shard-00-00.aswcm8s.mongodb.net:27017,ac-wri7g9g-shard-00-01.aswcm8s.mongodb.net:27017,ac-wri7g9g-shard-00-02.aswcm8s.mongodb.net:27017/?ssl=true&replicaSet=atlas-p47cqp-shard-0&authSource=admin&retryWrites=true&w=majority"
+uri = # left blank in commit for security purposes
 # Create a new client and connect to the server
 connection = MongoClient(uri)
 db = connection["sin-tracking-app"] # store a reference to the database
